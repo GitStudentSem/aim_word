@@ -1,4 +1,4 @@
-export const getPartOfSpeechLabel = (code: string) => {
+export const getPartOfSpeechLabel = (code: string): string => {
 	const labels: Record<string, string> = {
 		n: "сущ.",
 		v: "глаг.",

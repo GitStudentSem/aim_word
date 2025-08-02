@@ -1,0 +1,50 @@
+.meaningItem {
+  padding: 12px 0;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.meaningItem:last-child {
+  border-bottom: none;
+}
+
+.meaningHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.transcription {
+  color: #6b7280;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.translation {
+  font-size: 16px;
+  color: #374151;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.note {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .translation {
+    font-size: 15px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
