@@ -1,0 +1,304 @@
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.count {
+  background: #4a90e2;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.emptyState h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #374151;
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.wordsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wordCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.wordCard:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wordHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.wordInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wordText {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.partOfSpeech {
+  background: #4a90e2;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.transcription {
+  color: #6b7280;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.wordActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.soundButton,
+.expandButton,
+.removeButton {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.soundButton:hover,
+.expandButton:hover {
+  background: #e5e7eb;
+  transform: scale(1.05);
+}
+
+.removeButton {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.removeButton:hover {
+  background: #fecaca;
+  transform: scale(1.05);
+}
+
+.basicInfo {
+  margin-bottom: 12px;
+}
+
+.translation {
+  font-size: 16px;
+  color: #374151;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.note {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.addedDate {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.expandedContent {
+  border-top: 1px solid #f3f4f6;
+  padding-top: 16px;
+  margin-top: 12px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 4px;
+}
+
+.section p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.example {
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.example p {
+  margin: 0;
+  flex: 1;
+  font-style: italic;
+}
+
+.exampleSoundButton {
+  background: #e5e7eb;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.exampleSoundButton:hover {
+  background: #d1d5db;
+  transform: scale(1.05);
+}
+
+.images {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.wordImage {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.alternatives {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alternative {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #4b5563;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header h2 {
+    font-size: 20px;
+  }
+
+  .wordText {
+    font-size: 18px;
+  }
+
+  .translation {
+    font-size: 15px;
+  }
+
+  .wordActions {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .soundButton,
+  .expandButton,
+  .removeButton {
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 14px;
+  }
+
+  .images {
+    gap: 8px;
+  }
+
+  .wordImage {
+    width: 100px;
+    height: 75px;
+  }
+}
