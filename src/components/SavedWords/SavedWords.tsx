@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { wordStore } from "../../stores/WordStore";
+import SoundButton from "../SoundButton/SoundButton";
 import styles from "./SavedWords.module.css";
 
 const SavedWords: React.FC = () => {
@@ -22,15 +23,22 @@ const SavedWords: React.FC = () => {
 
 	const getPartOfSpeechLabel = (code: string) => {
 		const labels: Record<string, string> = {
-			noun: "сущ.",
-			verb: "глаг.",
-			adj: "прил.",
-			adv: "нареч.",
-			prep: "предл.",
-			conj: "союз",
-			pron: "местоим.",
-			interj: "междом.",
-			num: "числ.",
+			n: "сущ.",
+			v: "глаг.",
+			j: "прил.",
+			r: "нареч.",
+			prp: "предл.",
+			prn: "местоим.",
+			crd: "числ.",
+			cjc: "союз",
+			exc: "междом.",
+			det: "артикль",
+			abb: "сокр.",
+			x: "частица",
+			ord: "порядк. числ.",
+			md: "модальный глаг.",
+			ph: "фраза",
+			phi: "идиома",
 		};
 		return labels[code] || code;
 	};
@@ -69,18 +77,10 @@ const SavedWords: React.FC = () => {
 							</div>
 
 							<div className={styles.wordActions}>
-								{savedWord.word.soundUrl && (
-									<button
-										className={styles.soundButton}
-										onClick={() => {
-											const audio = new Audio(savedWord.word.soundUrl);
-											audio.play();
-										}}
-										type="button"
-									>
-										🔊
-									</button>
-								)}
+								<SoundButton 
+									soundUrl={savedWord.word.soundUrl} 
+									size="small"
+								/>
 
 								<button
 									className={styles.expandButton}
@@ -92,9 +92,9 @@ const SavedWords: React.FC = () => {
 
 								<button
 									className={styles.removeButton}
-									onClick={() =>
-										wordStore.removeWordFromDictionary(savedWord.id)
-									}
+									onClick={async () => {
+										await wordStore.removeWordFromDictionary(savedWord.id);
+									}}
 									type="button"
 								>
 									🗑️
@@ -134,18 +134,10 @@ const SavedWords: React.FC = () => {
 												{savedWord.word.examples.map((example) => (
 													<div key={example.text} className={styles.example}>
 														<p>{example.text}</p>
-														{example.soundUrl && (
-															<button
-																className={styles.exampleSoundButton}
-																onClick={() => {
-																	const audio = new Audio(example.soundUrl);
-																	audio.play();
-																}}
-																type="button"
-															>
-																🔊
-															</button>
-														)}
+														<SoundButton 
+															soundUrl={example.soundUrl} 
+															size="small"
+														/>
 													</div>
 												))}
 											</div>

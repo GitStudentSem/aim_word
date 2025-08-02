@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { wordStore } from "../../stores/WordStore";
+import SoundButton from "../SoundButton/SoundButton";
 import styles from "./SearchInput.module.css";
 
 const SearchInput: React.FC = () => {
@@ -22,15 +23,22 @@ const SearchInput: React.FC = () => {
 
 	const getPartOfSpeechLabel = (code: string) => {
 		const labels: Record<string, string> = {
-			noun: "сущ.",
-			verb: "глаг.",
-			adj: "прил.",
-			adv: "нареч.",
-			prep: "предл.",
-			conj: "союз",
-			pron: "местоим.",
-			interj: "междом.",
-			num: "числ.",
+			n: "сущ.",
+			v: "глаг.",
+			j: "прил.",
+			r: "нареч.",
+			prp: "предл.",
+			prn: "местоим.",
+			crd: "числ.",
+			cjc: "союз",
+			exc: "междом.",
+			det: "артикль",
+			abb: "сокр.",
+			x: "частица",
+			ord: "порядк. числ.",
+			md: "модальный глаг.",
+			ph: "фраза",
+			phi: "идиома",
 		};
 		return labels[code] || code;
 	};
@@ -81,18 +89,10 @@ const SearchInput: React.FC = () => {
 									</div>
 
 									<div className={styles.actions}>
-										{meaning.soundUrl && (
-											<button
-												className={styles.soundButton}
-												onClick={() => {
-													const audio = new Audio(meaning.soundUrl);
-													audio.play();
-												}}
-												type="button"
-											>
-												🔊
-											</button>
-										)}
+										<SoundButton 
+											soundUrl={meaning.soundUrl} 
+											size="medium"
+										/>
 
 										<button
 											className={`${styles.addButton} ${

@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { skyengAPI } from "../API/Skyeng";
+import { myServerAPI } from "../API/MyServerAPI";
 
 export interface SavedWord {
 	id: string;
@@ -7,12 +8,7 @@ export interface SavedWord {
 	addedAt: Date;
 }
 
-// Интерфейс для данных из localStorage (без Date объекта)
-interface SavedWordFromStorage {
-	id: string;
-	word: IWordById;
-	addedAt: string; // ISO строка даты
-}
+
 
 class WordStore {
 	searchResults: IMeaning[] = [];
@@ -22,7 +18,12 @@ class WordStore {
 
 	constructor() {
 		makeAutoObservable(this);
-		this.loadSavedWords();
+		// Инициализируем загрузку слов
+		this.initializeWords();
+	}
+
+	private async initializeWords() {
+		await this.loadSavedWords();
 	}
 
 	setSearchQuery(query: string) {
@@ -68,11 +69,16 @@ class WordStore {
 					addedAt: new Date(),
 				};
 
-				// Проверяем, не добавлено ли уже это слово
-				const exists = this.savedWords.find((sw) => sw.id === savedWord.id);
-				if (!exists) {
-					this.savedWords.push(savedWord);
-					this.saveSavedWords();
+				// Используем MyServerAPI для сохранения
+				const result = await myServerAPI.addWordToDictionary(savedWord);
+				if (result.success && result.data) {
+					// Обновляем локальное состояние только если сохранение прошло успешно
+					const exists = this.savedWords.find((sw) => sw.id === savedWord.id);
+					if (!exists) {
+						this.savedWords.push(savedWord);
+					}
+				} else {
+					console.error("Error saving word:", result.error);
 				}
 			}
 		} catch (error) {
@@ -80,24 +86,28 @@ class WordStore {
 		}
 	}
 
-	removeWordFromDictionary(wordId: string) {
-		this.savedWords = this.savedWords.filter((word) => word.id !== wordId);
-		this.saveSavedWords();
-	}
-
-	private saveSavedWords() {
-		localStorage.setItem("savedWords", JSON.stringify(this.savedWords));
-	}
-
-	private loadSavedWords() {
+	async removeWordFromDictionary(wordId: string) {
 		try {
-			const saved = localStorage.getItem("savedWords");
-			if (saved) {
-				const parsed = JSON.parse(saved) as SavedWordFromStorage[];
-				this.savedWords = parsed.map((item: SavedWordFromStorage) => ({
-					...item,
-					addedAt: new Date(item.addedAt),
-				}));
+			const result = await myServerAPI.removeWordFromDictionary(wordId);
+			if (result.success) {
+				this.savedWords = this.savedWords.filter((word) => word.id !== wordId);
+			} else {
+				console.error("Error removing word:", result.error);
+			}
+		} catch (error) {
+			console.error("Error removing word from dictionary:", error);
+		}
+	}
+
+
+
+	private async loadSavedWords() {
+		try {
+			const result = await myServerAPI.getUserWords();
+			if (result.success && result.data) {
+				this.savedWords = result.data.words;
+			} else {
+				console.error("Error loading saved words:", result.error);
 			}
 		} catch (error) {
 			console.error("Error loading saved words:", error);

@@ -114,7 +114,6 @@
   align-items: center;
 }
 
-.soundButton,
 .expandButton,
 .removeButton {
   background: #f3f4f6;
@@ -131,7 +130,6 @@
   min-height: 40px;
 }
 
-.soundButton:hover,
 .expandButton:hover {
   background: #e5e7eb;
   transform: scale(1.05);
@@ -220,22 +218,6 @@
   font-style: italic;
 }
 
-.exampleSoundButton {
-  background: #e5e7eb;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 8px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.exampleSoundButton:hover {
-  background: #d1d5db;
-  transform: scale(1.05);
-}
-
 .images {
   display: flex;
   gap: 12px;
@@ -285,7 +267,6 @@
     gap: 4px;
   }
 
-  .soundButton,
   .expandButton,
   .removeButton {
     min-width: 36px;

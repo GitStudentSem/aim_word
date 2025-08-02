@@ -1,0 +1,55 @@
+.soundButton {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.soundButton:hover:not(:disabled) {
+  background: #e5e7eb;
+  transform: scale(1.05);
+}
+
+.soundButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Размеры */
+.small {
+  min-width: 32px;
+  min-height: 32px;
+  font-size: 12px;
+  padding: 6px 8px;
+}
+
+.medium {
+  min-width: 40px;
+  min-height: 40px;
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+.large {
+  min-width: 48px;
+  min-height: 48px;
+  font-size: 16px;
+  padding: 10px 12px;
+}
+
+/* Анимация при нажатии */
+.soundButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Фокус для доступности */
+.soundButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+}
