@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { wordStore } from "../../stores/WordStore";
+import { getPartOfSpeechLabel } from "../../utils/getPartOfSpeechLabel";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./SavedWords.module.css";
 
@@ -19,28 +20,6 @@ const SavedWords: React.FC = () => {
 			hour: "2-digit",
 			minute: "2-digit",
 		}).format(date);
-	};
-
-	const getPartOfSpeechLabel = (code: string) => {
-		const labels: Record<string, string> = {
-			n: "сущ.",
-			v: "глаг.",
-			j: "прил.",
-			r: "нареч.",
-			prp: "предл.",
-			prn: "местоим.",
-			crd: "числ.",
-			cjc: "союз",
-			exc: "междом.",
-			det: "артикль",
-			abb: "сокр.",
-			x: "частица",
-			ord: "порядк. числ.",
-			md: "модальный глаг.",
-			ph: "фраза",
-			phi: "идиома",
-		};
-		return labels[code] || code;
 	};
 
 	if (wordStore.savedWords.length === 0) {
@@ -77,10 +56,7 @@ const SavedWords: React.FC = () => {
 							</div>
 
 							<div className={styles.wordActions}>
-								<SoundButton 
-									soundUrl={savedWord.word.soundUrl} 
-									size="small"
-								/>
+								<SoundButton soundUrl={savedWord.word.soundUrl} size="small" />
 
 								<button
 									className={styles.expandButton}
@@ -134,8 +110,8 @@ const SavedWords: React.FC = () => {
 												{savedWord.word.examples.map((example) => (
 													<div key={example.text} className={styles.example}>
 														<p>{example.text}</p>
-														<SoundButton 
-															soundUrl={example.soundUrl} 
+														<SoundButton
+															soundUrl={example.soundUrl}
 															size="small"
 														/>
 													</div>

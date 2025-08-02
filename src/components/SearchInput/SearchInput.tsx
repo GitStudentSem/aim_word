@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { wordStore } from "../../stores/WordStore";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./SearchInput.module.css";
+import { getPartOfSpeechLabel } from "../../utils/getPartOfSpeechLabel";
 
 const SearchInput: React.FC = () => {
 	const [query, setQuery] = useState("");
@@ -19,28 +20,6 @@ const SearchInput: React.FC = () => {
 
 	const handleAddWord = async (meaningId: number) => {
 		await wordStore.addWordToDictionary(meaningId);
-	};
-
-	const getPartOfSpeechLabel = (code: string) => {
-		const labels: Record<string, string> = {
-			n: "сущ.",
-			v: "глаг.",
-			j: "прил.",
-			r: "нареч.",
-			prp: "предл.",
-			prn: "местоим.",
-			crd: "числ.",
-			cjc: "союз",
-			exc: "междом.",
-			det: "артикль",
-			abb: "сокр.",
-			x: "частица",
-			ord: "порядк. числ.",
-			md: "модальный глаг.",
-			ph: "фраза",
-			phi: "идиома",
-		};
-		return labels[code] || code;
 	};
 
 	return (
@@ -89,10 +68,7 @@ const SearchInput: React.FC = () => {
 									</div>
 
 									<div className={styles.actions}>
-										<SoundButton 
-											soundUrl={meaning.soundUrl} 
-											size="medium"
-										/>
+										<SoundButton soundUrl={meaning.soundUrl} size="medium" />
 
 										<button
 											className={`${styles.addButton} ${

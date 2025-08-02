@@ -1,5 +1,12 @@
 import type { SavedWord } from "../stores/WordStore";
 
+// Интерфейс для данных из localStorage (где даты хранятся как строки)
+interface SavedWordFromStorage {
+	id: string;
+	word: IWordById;
+	addedAt: string; // ISO строка даты
+}
+
 export interface ServerResponse<T> {
 	success: boolean;
 	data?: T;
@@ -210,14 +217,19 @@ class MyServerAPI {
 		try {
 			const saved = localStorage.getItem("savedWords");
 			if (saved) {
-				const parsed = JSON.parse(saved) as SavedWord[];
+				const parsed = JSON.parse(saved) as SavedWordFromStorage[];
+				// Преобразуем строки дат обратно в объекты Date
+				const words: SavedWord[] = parsed.map((item: SavedWordFromStorage) => ({
+					...item,
+					addedAt: new Date(item.addedAt),
+				}));
 				return {
 					success: true,
 					data: {
-						words: parsed,
-						total: parsed.length,
+						words,
+						total: words.length,
 						page: 1,
-						limit: parsed.length,
+						limit: words.length,
 					},
 				};
 			}
