@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import { useEffect, useState } from "react";
 import { exerciseStore } from "../../stores/ExerciseStore";
 import { wordStore } from "../../stores/WordStore";
 
+import LevelsInfo from "../LevelsInfo/LevelsInfo";
 import ExerciseLevel0 from "./ExerciseLevel0";
 import ExerciseLevel1 from "./ExerciseLevel1";
 import ExerciseLevel2 from "./ExerciseLevel2";
@@ -13,7 +14,6 @@ import ExerciseLevel6 from "./ExerciseLevel6";
 import ExerciseLevel7 from "./ExerciseLevel7";
 import ExerciseLevel8 from "./ExerciseLevel8";
 import ExerciseLevel9 from "./ExerciseLevel9";
-import LevelsInfo from "../LevelsInfo/LevelsInfo";
 import styles from "./Exercises.module.css";
 
 const Exercises: React.FC = observer(() => {
@@ -21,10 +21,11 @@ const Exercises: React.FC = observer(() => {
 	const [showLevelsInfo, setShowLevelsInfo] = useState(false);
 
 	// Синхронизируем слова из WordStore с ExerciseStore
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
-		wordStore.savedWords.forEach(savedWord => {
+		for (const savedWord of wordStore.savedWords) {
 			exerciseStore.addWordToProgress(savedWord.word);
-		});
+		}
 	}, [wordStore.savedWords]);
 
 	const handleStartExercise = () => {
@@ -40,7 +41,7 @@ const Exercises: React.FC = observer(() => {
 
 	const renderExercise = () => {
 		const { currentExercise } = exerciseStore;
-		
+
 		if (!currentExercise.isActive || !currentExercise.currentWord) {
 			return null;
 		}
@@ -51,66 +52,39 @@ const Exercises: React.FC = observer(() => {
 		switch (level) {
 			case 0:
 				return (
-					<ExerciseLevel0
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel0 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 1:
 				return (
-					<ExerciseLevel1
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel1 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 2:
 				return (
-					<ExerciseLevel2
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel2 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 3:
 				return (
-					<ExerciseLevel3
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel3 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 4:
 				return (
-					<ExerciseLevel4
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel4 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 5:
 				return (
-					<ExerciseLevel5
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel5 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 6:
 				return (
-					<ExerciseLevel6
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel6 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 7:
 				return (
-					<ExerciseLevel7
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel7 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 8:
 				return (
-					<ExerciseLevel8
-						word={word}
-						onComplete={handleCompleteExercise}
-					/>
+					<ExerciseLevel8 word={word} onComplete={handleCompleteExercise} />
 				);
 			case 9:
 			case 10:
@@ -141,6 +115,7 @@ const Exercises: React.FC = observer(() => {
 						className={styles.infoButton}
 						onClick={() => setShowLevelsInfo(true)}
 						title="Информация об уровнях"
+						type="button"
 					>
 						ℹ️
 					</button>
@@ -151,11 +126,15 @@ const Exercises: React.FC = observer(() => {
 						<span className={styles.statLabel}>Всего слов</span>
 					</div>
 					<div className={styles.statItem}>
-						<span className={styles.statNumber}>{statistics.completedWords}</span>
+						<span className={styles.statNumber}>
+							{statistics.completedWords}
+						</span>
 						<span className={styles.statLabel}>Выучено</span>
 					</div>
 					<div className={styles.statItem}>
-						<span className={styles.statNumber}>{statistics.inProgressWords}</span>
+						<span className={styles.statNumber}>
+							{statistics.inProgressWords}
+						</span>
 						<span className={styles.statLabel}>В процессе</span>
 					</div>
 					<div className={styles.statItem}>
@@ -170,15 +149,16 @@ const Exercises: React.FC = observer(() => {
 					{exerciseStore.currentSession && (
 						<div className={styles.sessionProgress}>
 							<div className={styles.progressBar}>
-								<div 
+								<div
 									className={styles.progressFill}
-									style={{ 
-										width: `${(exerciseStore.currentSession.completedWords / exerciseStore.currentSession.totalWords) * 100}%` 
+									style={{
+										width: `${(exerciseStore.currentSession.completedWords / exerciseStore.currentSession.totalWords) * 100}%`,
 									}}
 								/>
 							</div>
 							<div className={styles.progressText}>
-								Слово {exerciseStore.currentSession.completedWords + 1} из {exerciseStore.currentSession.totalWords}
+								Слово {exerciseStore.currentSession.completedWords + 1} из{" "}
+								{exerciseStore.currentSession.totalWords}
 							</div>
 						</div>
 					)}
@@ -188,14 +168,19 @@ const Exercises: React.FC = observer(() => {
 				<div className={styles.startScreen}>
 					{availableWords.length > 0 ? (
 						<>
-							<p>Готовы к тренировке? У вас есть {availableWords.length} слов для изучения.</p>
+							<p>
+								Готовы к тренировке? У вас есть {availableWords.length} слов для
+								изучения.
+							</p>
 							<p className={styles.sessionInfo}>
-								Каждая тренировка включает {Math.min(10, availableWords.length)} слов подряд.
+								Каждая тренировка включает {Math.min(10, availableWords.length)}{" "}
+								слов подряд.
 							</p>
 							<button
 								className={styles.startButton}
 								onClick={handleStartExercise}
 								disabled={isLoading}
+								type="button"
 							>
 								{isLoading ? "Загрузка..." : "Начать тренировку"}
 							</button>
@@ -209,9 +194,12 @@ const Exercises: React.FC = observer(() => {
 				</div>
 			)}
 
-			<LevelsInfo isOpen={showLevelsInfo} onClose={() => setShowLevelsInfo(false)} />
+			<LevelsInfo
+				isOpen={showLevelsInfo}
+				onClose={() => setShowLevelsInfo(false)}
+			/>
 		</div>
 	);
 });
 
-export default Exercises; 
+export default Exercises;

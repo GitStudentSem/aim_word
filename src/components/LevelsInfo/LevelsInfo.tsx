@@ -1,4 +1,3 @@
-import React from "react";
 import { levels } from "../../utils/levels";
 import styles from "./LevelsInfo.module.css";
 
@@ -11,10 +10,13 @@ const LevelsInfo: React.FC<LevelsInfoProps> = ({ isOpen, onClose }) => {
 	if (!isOpen) return null;
 
 	return (
+		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div className={styles.overlay} onClick={onClose}>
+			{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 			<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
 				<div className={styles.header}>
 					<h2>Система уровней изучения</h2>
+					{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
 					<button className={styles.closeButton} onClick={onClose}>
 						×
 					</button>
@@ -23,9 +25,9 @@ const LevelsInfo: React.FC<LevelsInfoProps> = ({ isOpen, onClose }) => {
 				<div className={styles.content}>
 					<div className={styles.intro}>
 						<p>
-							Слова изучаются по 14 уровням, от простого к сложному. 
-							За каждый правильный ответ вы переходите на следующий уровень, 
-							за неправильный — возвращаетесь на предыдущий.
+							Слова изучаются по 14 уровням, от простого к сложному. За каждый
+							правильный ответ вы переходите на следующий уровень, за
+							неправильный — возвращаетесь на предыдущий.
 						</p>
 					</div>
 
@@ -33,7 +35,9 @@ const LevelsInfo: React.FC<LevelsInfoProps> = ({ isOpen, onClose }) => {
 						{levels.map((level) => (
 							<div key={level.level} className={styles.levelItem}>
 								<div className={styles.levelHeader}>
-									<span className={styles.levelNumber}>Уровень {level.level}</span>
+									<span className={styles.levelNumber}>
+										Уровень {level.level}
+									</span>
 									{level.level === 0 && (
 										<span className={styles.levelType}>Ознакомление</span>
 									)}
@@ -41,7 +45,9 @@ const LevelsInfo: React.FC<LevelsInfoProps> = ({ isOpen, onClose }) => {
 										<span className={styles.levelType}>Активное изучение</span>
 									)}
 									{level.level >= 9 && level.level <= 13 && (
-										<span className={styles.levelType}>Интервальное повторение</span>
+										<span className={styles.levelType}>
+											Интервальное повторение
+										</span>
 									)}
 								</div>
 								<p className={styles.levelDescription}>{level.description}</p>
@@ -52,9 +58,17 @@ const LevelsInfo: React.FC<LevelsInfoProps> = ({ isOpen, onClose }) => {
 					<div className={styles.summary}>
 						<h3>Как это работает:</h3>
 						<ul>
-							<li><strong>Уровни 0-8:</strong> Активное изучение с постепенным усложнением</li>
-							<li><strong>Уровни 9-13:</strong> Интервальные повторения для закрепления в долгосрочной памяти</li>
-							<li><strong>Уровень 13:</strong> Слово считается выученным</li>
+							<li>
+								<strong>Уровни 0-8:</strong> Активное изучение с постепенным
+								усложнением
+							</li>
+							<li>
+								<strong>Уровни 9-13:</strong> Интервальные повторения для
+								закрепления в долгосрочной памяти
+							</li>
+							<li>
+								<strong>Уровень 13:</strong> Слово считается выученным
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -63,4 +77,4 @@ const LevelsInfo: React.FC<LevelsInfoProps> = ({ isOpen, onClose }) => {
 	);
 };
 
-export default LevelsInfo; 
+export default LevelsInfo;

@@ -77,11 +77,16 @@ class ExerciseStore {
 		try {
 			const saved = localStorage.getItem("wordProgress");
 			if (saved) {
-				const parsed = JSON.parse(saved);
-				this.wordProgress = parsed.map((item: any) => ({
+				const parsed: WordProgress[] = JSON.parse(saved);
+
+				this.wordProgress = parsed.map((item) => ({
 					...item,
-					lastCompletedAt: item.lastCompletedAt ? new Date(item.lastCompletedAt) : undefined,
-					nextReviewAt: item.nextReviewAt ? new Date(item.nextReviewAt) : undefined,
+					lastCompletedAt: item.lastCompletedAt
+						? new Date(item.lastCompletedAt)
+						: undefined,
+					nextReviewAt: item.nextReviewAt
+						? new Date(item.nextReviewAt)
+						: undefined,
 					addedAt: new Date(item.addedAt),
 				}));
 			}
@@ -101,7 +106,7 @@ class ExerciseStore {
 
 	// Добавление слова в прогресс
 	addWordToProgress(word: IWordById) {
-		const exists = this.wordProgress.find(wp => wp.wordId === word.id);
+		const exists = this.wordProgress.find((wp) => wp.wordId === word.id);
 		if (!exists) {
 			const newProgress: WordProgress = {
 				wordId: word.id,
@@ -119,26 +124,26 @@ class ExerciseStore {
 	// Получение слов для упражнений
 	getWordsForExercise(): WordProgress[] {
 		const now = new Date();
-		return this.wordProgress.filter(word => {
+		return this.wordProgress.filter((word) => {
 			// Если слово на уровне 0, оно готово к упражнениям
 			if (word.currentLevel === 0) return true;
-			
+
 			// Если есть nextReviewAt и время пришло
 			if (word.nextReviewAt && word.nextReviewAt <= now) return true;
-			
+
 			// Если слово не завершено (уровень < 13)
 			return word.currentLevel < 13;
 		});
 	}
 
 	// Получение случайных слов для сессии упражнений
-	getWordsForSession(count: number = 10): WordProgress[] {
+	getWordsForSession(count = 10): WordProgress[] {
 		const availableWords = this.getWordsForExercise();
 		if (availableWords.length === 0) return [];
-		
+
 		// Перемешиваем слова
 		const shuffledWords = [...availableWords].sort(() => Math.random() - 0.5);
-		
+
 		// Возвращаем нужное количество слов
 		return shuffledWords.slice(0, Math.min(count, availableWords.length));
 	}
@@ -147,16 +152,16 @@ class ExerciseStore {
 	getRandomWordForExercise(): WordProgress | null {
 		const availableWords = this.getWordsForExercise();
 		if (availableWords.length === 0) return null;
-		
+
 		const randomIndex = Math.floor(Math.random() * availableWords.length);
 		return availableWords[randomIndex];
 	}
 
 	// Начало сессии упражнений
-	startExerciseSession(wordCount: number = 10) {
+	startExerciseSession(wordCount = 10) {
 		const words = this.getWordsForSession(wordCount);
 		if (words.length === 0) return false;
-		
+
 		this.currentSession = {
 			words,
 			currentWordIndex: 0,
@@ -165,7 +170,7 @@ class ExerciseStore {
 			correctAnswers: 0,
 			startTime: new Date(),
 		};
-		
+
 		// Начинаем первое упражнение
 		this.startExercise(words[0]);
 		return true;
@@ -189,18 +194,18 @@ class ExerciseStore {
 
 		const wordId = this.currentExercise.currentWord.wordId;
 		const level = this.currentExercise.currentLevel || 0;
-		
+
 		// Обновляем прогресс слова
-		const wordIndex = this.wordProgress.findIndex(wp => wp.wordId === wordId);
+		const wordIndex = this.wordProgress.findIndex((wp) => wp.wordId === wordId);
 		if (wordIndex !== -1) {
 			const word = this.wordProgress[wordIndex];
-			
+
 			if (success) {
 				// Правильный ответ - переходим на следующий уровень
 				const nextLevel = Math.min(level + 1, 13);
 				word.currentLevel = nextLevel;
 				word.completedLevels.push(level);
-				
+
 				// Устанавливаем время следующего повторения для интервальных уровней
 				if (nextLevel >= 9) {
 					const intervals = [3, 6, 12, 24, 48]; // дни для уровней 9-13
@@ -216,7 +221,7 @@ class ExerciseStore {
 				word.currentLevel = Math.max(level - 1, 0);
 				word.errors++;
 			}
-			
+
 			word.lastCompletedAt = new Date();
 			this.wordProgress[wordIndex] = word;
 		}
@@ -245,10 +250,15 @@ class ExerciseStore {
 		this.saveProgress();
 
 		// Проверяем, есть ли еще слова в сессии
-		if (this.currentSession && this.currentSession.currentWordIndex < this.currentSession.words.length - 1) {
+		if (
+			this.currentSession &&
+			this.currentSession.currentWordIndex <
+				this.currentSession.words.length - 1
+		) {
 			// Переходим к следующему слову
 			this.currentSession.currentWordIndex++;
-			const nextWord = this.currentSession.words[this.currentSession.currentWordIndex];
+			const nextWord =
+				this.currentSession.words[this.currentSession.currentWordIndex];
 			this.startExercise(nextWord);
 		} else {
 			// Сессия завершена
@@ -269,16 +279,22 @@ class ExerciseStore {
 
 	// Получение описания уровня
 	getLevelDescription(level: number): string {
-		const levelData = levels.find(l => l.level === level);
+		const levelData = levels.find((l) => l.level === level);
 		return levelData?.description || "Неизвестный уровень";
 	}
 
 	// Получение статистики
 	getStatistics() {
 		const totalWords = this.wordProgress.length;
-		const completedWords = this.wordProgress.filter(w => w.currentLevel === 13).length;
-		const inProgressWords = this.wordProgress.filter(w => w.currentLevel > 0 && w.currentLevel < 13).length;
-		const newWords = this.wordProgress.filter(w => w.currentLevel === 0).length;
+		const completedWords = this.wordProgress.filter(
+			(w) => w.currentLevel === 13,
+		).length;
+		const inProgressWords = this.wordProgress.filter(
+			(w) => w.currentLevel > 0 && w.currentLevel < 13,
+		).length;
+		const newWords = this.wordProgress.filter(
+			(w) => w.currentLevel === 0,
+		).length;
 
 		return {
 			totalWords,
@@ -294,15 +310,15 @@ class ExerciseStore {
 			// Получаем случайные слова из API
 			const randomWords = await skyengAPI.getWordByMeaning("the");
 			if (randomWords && randomWords.length > 0) {
-				return randomWords.slice(0, count).map(word => word.text);
+				return randomWords.slice(0, count).map((word) => word.text);
 			}
 		} catch (error) {
 			console.error("Error getting random words:", error);
 		}
-		
+
 		// Fallback - возвращаем базовые слова
 		return ["happy", "good", "big", "small", "fast", "slow", "new", "old"];
 	}
 }
 
-export const exerciseStore = new ExerciseStore(); 
+export const exerciseStore = new ExerciseStore();

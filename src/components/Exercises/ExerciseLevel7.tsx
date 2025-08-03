@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseLevel7.module.css";
@@ -8,82 +8,83 @@ interface ExerciseLevel7Props {
 	onComplete: (success: boolean) => void;
 }
 
-const ExerciseLevel7: React.FC<ExerciseLevel7Props> = observer(({
-	word,
-	onComplete,
-}) => {
-	const [userInput, setUserInput] = useState("");
-	const [hasAnswered, setHasAnswered] = useState(false);
+const ExerciseLevel7: React.FC<ExerciseLevel7Props> = observer(
+	({ word, onComplete }) => {
+		const [userInput, setUserInput] = useState("");
+		const [hasAnswered, setHasAnswered] = useState(false);
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		if (!userInput.trim()) return;
-		
-		const isCorrect = userInput.toLowerCase().trim() === word.text.toLowerCase();
-		setHasAnswered(true);
-		onComplete(isCorrect);
-	};
+		const handleSubmit = (e: React.FormEvent) => {
+			e.preventDefault();
+			if (!userInput.trim()) return;
 
-	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				<h3>Уровень 7: Ввод слова по переводу и звуку</h3>
-				<p className={styles.description}>
-					Прослушайте слово и посмотрите перевод. Введите его на английском.
-				</p>
-			</div>
+			const isCorrect =
+				userInput.toLowerCase().trim() === word.text.toLowerCase();
+			setHasAnswered(true);
+			onComplete(isCorrect);
+		};
 
-			<div className={styles.exercise}>
-				<div className={styles.audioSection}>
-					<h4>Прослушайте слово:</h4>
-					{word.soundUrl && (
-						<div className={styles.soundButton}>
-							<SoundButton soundUrl={word.soundUrl} />
-						</div>
-					)}
+		return (
+			<div className={styles.container}>
+				<div className={styles.header}>
+					<h3>Уровень 7: Ввод слова по переводу и звуку</h3>
+					<p className={styles.description}>
+						Прослушайте слово и посмотрите перевод. Введите его на английском.
+					</p>
 				</div>
 
-				<div className={styles.translationSection}>
-					<h4>Перевод:</h4>
-					<p>{word.translation.text}</p>
-				</div>
-
-				<form onSubmit={handleSubmit} className={styles.inputSection}>
-					<h4>Введите английское слово:</h4>
-					<input
-						type="text"
-						value={userInput}
-						onChange={(e) => setUserInput(e.target.value)}
-						placeholder="Введите слово..."
-						className={styles.wordInput}
-						disabled={hasAnswered}
-						autoFocus
-					/>
-					<button
-						type="submit"
-						className={styles.submitButton}
-						disabled={!userInput.trim() || hasAnswered}
-					>
-						Проверить
-					</button>
-				</form>
-
-				{hasAnswered && (
-					<div className={styles.result}>
-						{userInput.toLowerCase().trim() === word.text.toLowerCase() ? (
-							<div className={styles.correct}>
-								<p>Правильно! "{word.text}"</p>
-							</div>
-						) : (
-							<div className={styles.incorrect}>
-								<p>Неправильно! Правильный ответ: "{word.text}"</p>
+				<div className={styles.exercise}>
+					<div className={styles.audioSection}>
+						<h4>Прослушайте слово:</h4>
+						{word.soundUrl && (
+							<div className={styles.soundButton}>
+								<SoundButton soundUrl={word.soundUrl} />
 							</div>
 						)}
 					</div>
-				)}
-			</div>
-		</div>
-	);
-});
 
-export default ExerciseLevel7; 
+					<div className={styles.translationSection}>
+						<h4>Перевод:</h4>
+						<p>{word.translation.text}</p>
+					</div>
+
+					<form onSubmit={handleSubmit} className={styles.inputSection}>
+						<h4>Введите английское слово:</h4>
+						<input
+							type="text"
+							value={userInput}
+							onChange={(e) => setUserInput(e.target.value)}
+							placeholder="Введите слово..."
+							className={styles.wordInput}
+							disabled={hasAnswered}
+							// biome-ignore lint/a11y/noAutofocus: <explanation>
+							autoFocus
+						/>
+						<button
+							type="submit"
+							className={styles.submitButton}
+							disabled={!userInput.trim() || hasAnswered}
+						>
+							Проверить
+						</button>
+					</form>
+
+					{hasAnswered && (
+						<div className={styles.result}>
+							{userInput.toLowerCase().trim() === word.text.toLowerCase() ? (
+								<div className={styles.correct}>
+									<p>Правильно! "{word.text}"</p>
+								</div>
+							) : (
+								<div className={styles.incorrect}>
+									<p>Неправильно! Правильный ответ: "{word.text}"</p>
+								</div>
+							)}
+						</div>
+					)}
+				</div>
+			</div>
+		);
+	},
+);
+
+export default ExerciseLevel7;
