@@ -1,8 +1,8 @@
 import styles from "./Navigation.module.css";
 
 interface NavigationProps {
-	activeTab: "search" | "dictionary";
-	onTabChange: (tab: "search" | "dictionary") => void;
+	activeTab: "search" | "dictionary" | "exercises";
+	onTabChange: (tab: "search" | "dictionary" | "exercises") => void;
 }
 
 const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
@@ -25,6 +25,15 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
 				>
 					<span className={styles.tabIcon}>📚</span>
 					<span className={styles.tabText}>Словарь</span>
+				</button>
+
+				<button
+					className={`${styles.tab} ${activeTab === "exercises" ? styles.active : ""}`}
+					onClick={() => onTabChange("exercises")}
+					type="button"
+				>
+					<span className={styles.tabIcon}>🎯</span>
+					<span className={styles.tabText}>Упражнения</span>
 				</button>
 			</div>
 		</nav>

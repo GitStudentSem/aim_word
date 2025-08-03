@@ -108,6 +108,16 @@
   font-style: italic;
 }
 
+.levelBadge {
+  background: #10b981;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
 .wordActions {
   display: flex;
   gap: 8px;

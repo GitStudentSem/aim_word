@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { wordStore } from "../../stores/WordStore";
+import { exerciseStore } from "../../stores/ExerciseStore";
 import { getPartOfSpeechLabel } from "../../utils/getPartOfSpeechLabel";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./SavedWords.module.css";
@@ -53,6 +54,23 @@ const SavedWords: React.FC = () => {
 										[{savedWord.word.transcription}]
 									</span>
 								)}
+								{(() => {
+									const progress = exerciseStore.wordProgress.find(
+										wp => wp.wordId === savedWord.id
+									);
+									if (progress) {
+										return (
+											<span className={styles.levelBadge}>
+												Уровень {progress.currentLevel}
+											</span>
+										);
+									}
+									return (
+										<span className={styles.levelBadge}>
+											Новый
+										</span>
+									);
+								})()}
 							</div>
 
 							<div className={styles.wordActions}>

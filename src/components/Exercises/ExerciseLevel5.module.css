@@ -1,0 +1,202 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.description {
+  margin: 0;
+  color: #6c757d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.exercise {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.visualSection {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.imageContainer {
+  margin-bottom: 20px;
+}
+
+.wordImage {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.translation {
+  margin-bottom: 20px;
+}
+
+.translation h4 {
+  margin: 0 0 8px 0;
+  color: #495057;
+  font-size: 16px;
+}
+
+.translation p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.wordAssembly {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.wordAssembly h4 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 16px;
+}
+
+.assembledWord {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px solid #dee2e6;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeButton {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.removeButton:hover:not(:disabled) {
+  background: #5a6268;
+}
+
+.removeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lettersSection {
+  margin-bottom: 30px;
+}
+
+.lettersSection h4 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 16px;
+  text-align: center;
+}
+
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.letterButton {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  background: white;
+  color: #495057;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letterButton:hover:not(:disabled) {
+  border-color: #007bff;
+  background: #f8f9fa;
+}
+
+.letterButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.actions {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.checkButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkButton:hover:not(:disabled) {
+  background: #218838;
+}
+
+.checkButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.result {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.correct {
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+.incorrect {
+  color: #dc3545;
+  margin-bottom: 15px;
+}
+
+.correct p,
+.incorrect p {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+}

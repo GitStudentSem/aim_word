@@ -1,0 +1,101 @@
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.wordInfo {
+  flex: 1;
+}
+
+.wordText {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.transcription {
+  color: #6c757d;
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.imageContainer {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.wordImage {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.translation,
+.definition,
+.examples,
+.mnemonics,
+.alternatives {
+  margin-bottom: 20px;
+}
+
+.translation h4,
+.definition h4,
+.examples h4,
+.mnemonics h4,
+.alternatives h4 {
+  margin: 0 0 8px 0;
+  color: #495057;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.translation p,
+.definition p,
+.mnemonics p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.note {
+  color: #6c757d;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.example {
+  margin-bottom: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #007bff;
+}
+
+.example p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.alternative {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.alternative strong {
+  color: #007bff;
+}
