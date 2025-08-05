@@ -2,14 +2,16 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { exerciseStore } from "../../stores/ExerciseStore";
 import styles from "./ExerciseLevel4.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel4Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel4: React.FC<ExerciseLevel4Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [options, setOptions] = useState<string[]>([]);
 		const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 		const [hasAnswered, setHasAnswered] = useState(false);
@@ -58,12 +60,7 @@ const ExerciseLevel4: React.FC<ExerciseLevel4Props> = observer(
 
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень 4: Выбор правильного английского слова</h3>
-					<p className={styles.description}>
-						Выберите правильное английское слово по картинке и переводу.
-					</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.visualSection}>

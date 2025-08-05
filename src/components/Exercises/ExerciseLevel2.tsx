@@ -1,14 +1,17 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import { RememberOrNotButtons } from "../RememberOrNotButtons/RememberOrNotButtons";
 import styles from "./ExerciseLevel2.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel2Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel2: React.FC<ExerciseLevel2Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [hasAnswered, setHasAnswered] = useState(false);
 		const [userAnswer, setUserAnswer] = useState<boolean | null>(null);
 
@@ -23,12 +26,7 @@ const ExerciseLevel2: React.FC<ExerciseLevel2Props> = observer(
 
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень 2: Узнавание по картинке и переводу</h3>
-					<p className={styles.description}>
-						Посмотрите на картинку и перевод. Узнаёте ли вы это слово?
-					</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.visualSection}>
@@ -42,39 +40,18 @@ const ExerciseLevel2: React.FC<ExerciseLevel2Props> = observer(
 							</div>
 						)}
 						<div className={styles.translation}>
-							<h4>Перевод:</h4>
-							<p>{word.translation.text}</p>
+							<h4>{word.translation.text}</h4>
 							{word.translation.note && (
 								<p className={styles.note}>{word.translation.note}</p>
 							)}
 						</div>
 					</div>
 
-					<div className={styles.question}>
-						<h4>Узнаёте ли вы это слово?</h4>
-						<div className={styles.answerButtons}>
-							<button
-								className={`${styles.answerButton} ${styles.rememberButton} ${
-									userAnswer === true ? styles.selected : ""
-								}`}
-								onClick={() => handleAnswer(true)}
-								disabled={hasAnswered}
-								type="button"
-							>
-								Помню
-							</button>
-							<button
-								className={`${styles.answerButton} ${styles.dontRememberButton} ${
-									userAnswer === false ? styles.selected : ""
-								}`}
-								onClick={() => handleAnswer(false)}
-								disabled={hasAnswered}
-								type="button"
-							>
-								Не помню
-							</button>
-						</div>
-					</div>
+					<RememberOrNotButtons
+						userAnswer={userAnswer}
+						handleAnswer={handleAnswer}
+						hasAnswered={hasAnswered}
+					/>
 
 					{hasAnswered && (
 						<div className={styles.result}>

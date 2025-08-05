@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { observer } from "mobx-react-lite";
+import { useState } from "react";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseLevel9.module.css";
 
@@ -14,17 +15,6 @@ const ExerciseLevel9: React.FC<ExerciseLevel9Props> = observer(
 		const [userInput, setUserInput] = useState("");
 		const [hasAnswered, setHasAnswered] = useState(false);
 
-		const getLevelInfo = () => {
-			const intervals = [3, 6, 12, 24, 48];
-			const intervalIndex = level - 9;
-			const days = intervals[intervalIndex] || 3;
-
-			return {
-				days,
-				description: `Вспомните слово через ${days} дней. Введите его по памяти.`,
-			};
-		};
-
 		const handleSubmit = (e: React.FormEvent) => {
 			e.preventDefault();
 			if (!userInput.trim()) return;
@@ -35,14 +25,9 @@ const ExerciseLevel9: React.FC<ExerciseLevel9Props> = observer(
 			onComplete(isCorrect);
 		};
 
-		const levelInfo = getLevelInfo();
-
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень {level}: Интервальное повторение</h3>
-					<p className={styles.description}>{levelInfo.description}</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.audioSection}>

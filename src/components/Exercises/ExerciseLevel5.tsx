@@ -1,14 +1,16 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import styles from "./ExerciseLevel5.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel5Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel5: React.FC<ExerciseLevel5Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [assembledWord, setAssembledWord] = useState("");
 		const [availableLetters, setAvailableLetters] = useState<string[]>([]);
 		const [hasAnswered, setHasAnswered] = useState(false);
@@ -42,12 +44,7 @@ const ExerciseLevel5: React.FC<ExerciseLevel5Props> = observer(
 
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень 5: Сборка слова из букв</h3>
-					<p className={styles.description}>
-						Соберите слово из букв. Подсказка: картинка и перевод.
-					</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.visualSection}>

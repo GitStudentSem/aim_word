@@ -1,4 +1,5 @@
 import { observer } from "mobx-react-lite";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 import PartOfSpeechBadge from "../PartOfSpeechBadge/PartOfSpeechBadge";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseCard.module.css";
@@ -28,6 +29,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = observer(
 				<div className={styles.header}>
 					<div className={styles.wordInfo}>
 						<h3 className={styles.wordText}>{word.text}</h3>
+						<LevelBadge level={0} />
 						{showTranscription && word.transcription && (
 							<span className={styles.transcription}>
 								[{word.transcription}]

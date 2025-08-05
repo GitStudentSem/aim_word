@@ -1,15 +1,18 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import { RememberOrNotButtons } from "../RememberOrNotButtons/RememberOrNotButtons";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseLevel1.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel1Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel1: React.FC<ExerciseLevel1Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [hasAnswered, setHasAnswered] = useState(false);
 		const [userAnswer, setUserAnswer] = useState<boolean | null>(null);
 
@@ -24,12 +27,7 @@ const ExerciseLevel1: React.FC<ExerciseLevel1Props> = observer(
 
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень 1: Узнавание по звуку</h3>
-					<p className={styles.description}>
-						Прослушайте слово и определите, узнаёте ли вы его.
-					</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.soundSection}>
@@ -41,31 +39,11 @@ const ExerciseLevel1: React.FC<ExerciseLevel1Props> = observer(
 						)}
 					</div>
 
-					<div className={styles.question}>
-						<h4>Узнаёте ли вы это слово?</h4>
-						<div className={styles.answerButtons}>
-							<button
-								className={`${styles.answerButton} ${styles.rememberButton} ${
-									userAnswer === true ? styles.selected : ""
-								}`}
-								onClick={() => handleAnswer(true)}
-								disabled={hasAnswered}
-								type="button"
-							>
-								Помню
-							</button>
-							<button
-								className={`${styles.answerButton} ${styles.dontRememberButton} ${
-									userAnswer === false ? styles.selected : ""
-								}`}
-								onClick={() => handleAnswer(false)}
-								disabled={hasAnswered}
-								type="button"
-							>
-								Не помню
-							</button>
-						</div>
-					</div>
+					<RememberOrNotButtons
+						userAnswer={userAnswer}
+						handleAnswer={handleAnswer}
+						hasAnswered={hasAnswered}
+					/>
 
 					{hasAnswered && (
 						<div className={styles.result}>

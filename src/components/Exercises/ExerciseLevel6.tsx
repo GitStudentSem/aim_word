@@ -1,14 +1,16 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import styles from "./ExerciseLevel6.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel6Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel6: React.FC<ExerciseLevel6Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [userInput, setUserInput] = useState("");
 		const [hasAnswered, setHasAnswered] = useState(false);
 
@@ -24,12 +26,7 @@ const ExerciseLevel6: React.FC<ExerciseLevel6Props> = observer(
 
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень 6: Ввод слова по картинке и переводу</h3>
-					<p className={styles.description}>
-						Введите английское слово, глядя на картинку и русский перевод.
-					</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.visualSection}>

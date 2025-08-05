@@ -3,14 +3,16 @@ import { useEffect, useState } from "react";
 import { exerciseStore } from "../../stores/ExerciseStore";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseLevel3.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel3Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel3: React.FC<ExerciseLevel3Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [options, setOptions] = useState<string[]>([]);
 		const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 		const [hasAnswered, setHasAnswered] = useState(false);
@@ -64,16 +66,10 @@ const ExerciseLevel3: React.FC<ExerciseLevel3Props> = observer(
 
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень 3: Выбор правильного перевода</h3>
-					<p className={styles.description}>
-						Прослушайте слово и выберите правильный перевод.
-					</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.wordSection}>
-						<h4>Слово:</h4>
 						<div className={styles.wordDisplay}>
 							<span className={styles.wordText}>{word.text}</span>
 							{word.soundUrl && <SoundButton soundUrl={word.soundUrl} />}

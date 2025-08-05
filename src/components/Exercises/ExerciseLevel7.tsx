@@ -1,15 +1,17 @@
-import { useState } from "react";
 import { observer } from "mobx-react-lite";
+import { useState } from "react";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseLevel7.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel7Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel7: React.FC<ExerciseLevel7Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [userInput, setUserInput] = useState("");
 		const [hasAnswered, setHasAnswered] = useState(false);
 
@@ -25,12 +27,7 @@ const ExerciseLevel7: React.FC<ExerciseLevel7Props> = observer(
 
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					<h3>Уровень 7: Ввод слова по переводу и звуку</h3>
-					<p className={styles.description}>
-						Прослушайте слово и посмотрите перевод. Введите его на английском.
-					</p>
-				</div>
+				<LevelBadge level={level} />
 
 				<div className={styles.exercise}>
 					<div className={styles.audioSection}>

@@ -1,15 +1,17 @@
-import { useState } from "react";
 import { observer } from "mobx-react-lite";
+import { useState } from "react";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseLevel8.module.css";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel8Props {
 	word: IWordById;
 	onComplete: (success: boolean) => void;
+	level: number;
 }
 
 const ExerciseLevel8: React.FC<ExerciseLevel8Props> = observer(
-	({ word, onComplete }) => {
+	({ word, level, onComplete }) => {
 		const [userInput, setUserInput] = useState("");
 		const [hasAnswered, setHasAnswered] = useState(false);
 		const [attempts, setAttempts] = useState(0);
@@ -34,11 +36,8 @@ const ExerciseLevel8: React.FC<ExerciseLevel8Props> = observer(
 		return (
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<h3>Уровень 8: Ввод слова только по звуку</h3>
-					<p className={styles.description}>
-						Прослушайте слово и напишите его на английском языке без других
-						подсказок.
-					</p>
+					<LevelBadge level={level} />
+
 					<p className={styles.attempts}>
 						Попыток осталось: {maxAttempts - attempts}
 					</p>

@@ -3,24 +3,6 @@
   margin: 0 auto;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.header h3 {
-  margin: 0 0 10px 0;
-  color: #333;
-  font-size: 20px;
-}
-
-.description {
-  margin: 0;
-  color: #6c757d;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
 .exercise {
   background: white;
   border-radius: 12px;
@@ -41,62 +23,6 @@
 
 .soundButton {
   display: inline-block;
-}
-
-.question {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.question h4 {
-  margin: 0 0 20px 0;
-  color: #495057;
-  font-size: 16px;
-}
-
-.answerButtons {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-}
-
-.answerButton {
-  padding: 12px 24px;
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
-  background: white;
-  color: #495057;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  min-width: 120px;
-}
-
-.answerButton:hover:not(:disabled) {
-  border-color: #007bff;
-  color: #007bff;
-}
-
-.answerButton.selected {
-  border-color: #007bff;
-  background: #007bff;
-  color: white;
-}
-
-.answerButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.rememberButton.selected {
-  background: #28a745;
-  border-color: #28a745;
-}
-
-.dontRememberButton.selected {
-  background: #dc3545;
-  border-color: #dc3545;
 }
 
 .result {

@@ -46,45 +46,81 @@ const Exercises: React.FC = observer(() => {
 			return null;
 		}
 
-		const level = currentExercise.currentLevel || 0;
+		const currentLevel = currentExercise.currentLevel || 0;
 		const word = currentExercise.currentWord.word;
 
-		switch (level) {
+		switch (currentLevel) {
 			case 0:
 				return (
-					<ExerciseLevel0 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel0
+						word={word}
+						onComplete={handleCompleteExercise}
+						level={currentLevel}
+					/>
 				);
 			case 1:
 				return (
-					<ExerciseLevel1 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel1
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 2:
 				return (
-					<ExerciseLevel2 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel2
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 3:
 				return (
-					<ExerciseLevel3 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel3
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 4:
 				return (
-					<ExerciseLevel4 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel4
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 5:
 				return (
-					<ExerciseLevel5 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel5
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 6:
 				return (
-					<ExerciseLevel6 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel6
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 7:
 				return (
-					<ExerciseLevel7 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel7
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 8:
 				return (
-					<ExerciseLevel8 word={word} onComplete={handleCompleteExercise} />
+					<ExerciseLevel8
+						word={word}
+						level={currentLevel}
+						onComplete={handleCompleteExercise}
+					/>
 				);
 			case 9:
 			case 10:
@@ -94,7 +130,7 @@ const Exercises: React.FC = observer(() => {
 				return (
 					<ExerciseLevel9
 						word={word}
-						level={level}
+						level={currentLevel}
 						onComplete={handleCompleteExercise}
 					/>
 				);
