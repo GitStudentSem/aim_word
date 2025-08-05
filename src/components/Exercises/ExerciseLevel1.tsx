@@ -1,9 +1,10 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 import { RememberOrNotButtons } from "../RememberOrNotButtons/RememberOrNotButtons";
 import SoundButton from "../SoundButton/SoundButton";
 import styles from "./ExerciseLevel1.module.css";
-import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel1Props {
 	word: IWordById;

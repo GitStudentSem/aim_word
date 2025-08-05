@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import { LevelBadge } from "../LevelBadge/LevelBadge";
 import { RememberOrNotButtons } from "../RememberOrNotButtons/RememberOrNotButtons";
 import styles from "./ExerciseLevel2.module.css";
-import { LevelBadge } from "../LevelBadge/LevelBadge";
 
 interface ExerciseLevel2Props {
 	word: IWordById;
@@ -14,8 +14,9 @@ const ExerciseLevel2: React.FC<ExerciseLevel2Props> = observer(
 	({ word, level, onComplete }) => {
 		const [hasAnswered, setHasAnswered] = useState(false);
 		const [userAnswer, setUserAnswer] = useState<boolean | null>(null);
-
+		console.log("render lvl 2");
 		const handleAnswer = (answer: boolean) => {
+			console.log("handleAnswer 2", answer);
 			setUserAnswer(answer);
 			setHasAnswered(true);
 		};

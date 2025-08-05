@@ -1,14 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import { skyengAPI } from "../API/Skyeng";
 import { myServerAPI } from "../API/MyServerAPI";
+import { skyengAPI } from "../API/Skyeng";
 
 export interface SavedWord {
 	id: string;
 	word: IWordById;
 	addedAt: Date;
 }
-
-
 
 class WordStore {
 	searchResults: IMeaning[] = [];
@@ -75,7 +73,7 @@ class WordStore {
 					// Обновляем локальное состояние только если сохранение прошло успешно
 					const exists = this.savedWords.find((sw) => sw.id === savedWord.id);
 					if (!exists) {
-						this.savedWords.push(savedWord);
+						this.addNewWord(savedWord);
 					}
 				} else {
 					console.error("Error saving word:", result.error);
@@ -84,6 +82,10 @@ class WordStore {
 		} catch (error) {
 			console.error("Error adding word to dictionary:", error);
 		}
+	}
+
+	addNewWord(savedWord: SavedWord) {
+		this.savedWords.push(savedWord);
 	}
 
 	async removeWordFromDictionary(wordId: string) {
@@ -98,8 +100,6 @@ class WordStore {
 			console.error("Error removing word from dictionary:", error);
 		}
 	}
-
-
 
 	private async loadSavedWords() {
 		try {

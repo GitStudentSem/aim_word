@@ -56,6 +56,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						onComplete={handleCompleteExercise}
 						level={currentLevel}
+						key={word.id}
 					/>
 				);
 			case 1:
@@ -64,6 +65,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 2:
@@ -72,6 +74,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 3:
@@ -80,6 +83,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 4:
@@ -88,6 +92,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 5:
@@ -96,6 +101,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 6:
@@ -104,6 +110,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 7:
@@ -112,6 +119,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 8:
@@ -120,6 +128,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			case 9:
@@ -132,6 +141,7 @@ const Exercises: React.FC = observer(() => {
 						word={word}
 						level={currentLevel}
 						onComplete={handleCompleteExercise}
+						key={word.id}
 					/>
 				);
 			default:
